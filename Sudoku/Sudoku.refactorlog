@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="3f97ea9a-e8e5-4ae3-aa96-55264ac0c541" ChangeDateTime="04/23/2014 09:36:11">
+    <Property Name="ElementName" Value="[dbo].[Rows].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Rows]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="cellID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3b7a7ba6-a7b2-4452-acdd-8ff7c3c3ca7d" ChangeDateTime="04/23/2014 09:39:29">
+    <Property Name="ElementName" Value="[dbo].[cells].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[cells]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="887f77e8-45be-4f8c-9ea2-7b6283e6f3cc" ChangeDateTime="04/23/2014 09:45:02">
+    <Property Name="ElementName" Value="[dbo].[candidates].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[candidates]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="cellID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="28157e17-6a55-40c3-9091-3fa1427709ca" ChangeDateTime="04/23/2014 09:45:30">
+    <Property Name="ElementName" Value="[dbo].[candidates].[NumberPossible]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[candidates]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NumberPossibles" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="acf39e43-2a74-4878-b530-49f7389f23ee" ChangeDateTime="04/23/2014 09:46:09">
+    <Property Name="ElementName" Value="[dbo].[candidates].[NumberPossibles]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[candidates]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="numberPossibles" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a1cf50e4-ddde-4984-9194-f1b33d2fb2f6" ChangeDateTime="04/23/2014 09:46:23">
+    <Property Name="ElementName" Value="[dbo].[candidates].[Digit]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[candidates]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="digit_output" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f78c6615-4011-4ff3-8f85-2dd593415f81" ChangeDateTime="04/23/2014 09:48:29">
+    <Property Name="ElementName" Value="[dbo].[candidate_digits].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[candidate_digits]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="cellID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a1624a12-4427-42a1-8413-f399a6fadd3b" ChangeDateTime="04/23/2014 09:54:45">
+    <Property Name="ElementName" Value="[dbo].[valid_digit_inputs].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[valid_digit_inputs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="digit" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4ad03b14-eb5b-4af7-86dd-863b59a2669c" ChangeDateTime="04/23/2014 09:56:13">
+    <Property Name="ElementName" Value="[dbo].[CK_valid_digit_inputs_digit]" />
+    <Property Name="ElementType" Value="SqlCheckConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[valid_digit_inputs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[CK_checkValidRange]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="07c53979-90df-4a6f-8c63-000c547b3422" ChangeDateTime="04/23/2014 10:44:39">
+    <Property Name="ElementName" Value="[dbo].[lookup]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[lookupRCB]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a5065814-c7f5-44b6-862b-c02975e06b1d" ChangeDateTime="04/23/2014 10:47:09">
+    <Property Name="ElementName" Value="[dbo].[constants].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[constants]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CAGE_SIZE" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4b2dd872-ff88-4133-b405-a6066fabf704" ChangeDateTime="04/23/2014 10:54:12">
+    <Property Name="ElementName" Value="[dbo].[lookupRCB].[col]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[lookupRCB]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[s_col]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f932802a-cb4b-4ac6-9272-02be8dbc9861" ChangeDateTime="04/23/2014 10:54:21">
+    <Property Name="ElementName" Value="[dbo].[lookupRCB].[row]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[lookupRCB]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[s_row]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="01976caf-4121-4940-9404-6a969bab788b" ChangeDateTime="04/23/2014 10:54:30">
+    <Property Name="ElementName" Value="[dbo].[lookupRCB].[block]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[lookupRCB]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[s_block]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0b8cade9-c849-4f5b-984d-777e78f92eb6" ChangeDateTime="04/23/2014 10:58:29">
+    <Property Name="ElementName" Value="[dbo].[constants].[FIRST_CELL]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[constants]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FIRST_CELL_ID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="de8d50ac-4f2f-438c-aacf-34ab83eb6442" ChangeDateTime="04/23/2014 11:04:50">
+    <Property Name="ElementName" Value="[dbo].[cells].[Start]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[cells]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[start]" />
+  </Operation>
+</Operations>
