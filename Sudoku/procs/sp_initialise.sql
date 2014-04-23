@@ -1,8 +1,10 @@
 ﻿CREATE PROCEDURE [dbo].[sp_initialise]
 	
 AS
-	
-	exec sp_initialiseConstants;
+	if (select count(*) from dbo.constants)=0
+	begin
+		exec sp_initialiseConstants;
+	end
 	
 	DELETE FROM dbo.lookupRCB;
 	DELETE FROM dbo.candidate_digits;
@@ -34,7 +36,7 @@ AS
 	while @counter_cell<=@counterMAX
 		begin
 			INSERT INTO dbo.cells(id,start) VALUES (@counter_cell,@defaultValue);
-			INSERT INTO dbo.candidates(cellID,numberPossibles,digit_output) VALUES(@counter_cell,@numberPossibles,@defaultValue)
+			INSERT INTO dbo.candidates(cellID,numberPossibles,[digit_current],[digit_next]) VALUES(@counter_cell,@numberPossibles,@defaultValue,@defaultValue)
 			set @counter_digit = @minDigitVal;
 			while @counter_digit<=@maxDigitVal
 				begin

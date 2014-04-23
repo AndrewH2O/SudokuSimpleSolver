@@ -59,6 +59,8 @@
     <Folder Include="Properties" />
     <Folder Include="tables" />
     <Folder Include="procs" />
+    <Folder Include="scripts" />
+    <Folder Include="scratchScripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="tables\cells.sql" />
@@ -70,14 +72,23 @@
     <Build Include="tables\constants.sql" />
     <Build Include="tables\valid_digits_in_Soln.sql" />
     <Build Include="procs\sp_initialiseConstants.sql" />
+    <None Include="scripts\sq_initialiseData.sql" />
+    <None Include="scripts\sq_loadData.sql" />
+    <Build Include="procs\sp_loadData.sql" />
+    <Build Include="procs\sp_displayStart.sql" />
+    <Build Include="procs\sp_displayNumberOfDigitsToFind.sql" />
+    <Build Include="procs\sp_insertCandidates.sql" />
+    <Build Include="procs\sp_eliminateCandidates.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Sudoku.refactorlog" />
   </ItemGroup>
   <ItemGroup>
     <None Include="scratchpad.sql" />
-    <None Include="initialiseData.sql" />
     <None Include="Sudoku.publish.xml" />
+    <None Include="scratchScripts\testEliminateCandidates.sql" />
+    <None Include="scratchScripts\test_InsertCandidates.sql" />
+    <None Include="scripts\sq_eliminateCandidates.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

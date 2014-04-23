@@ -9,5 +9,8 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+--link to my scripts
 
-:r  .\initialiseData.sql
+:r  .\scripts\sq_initialiseData.sql
+:r  .\scripts\sq_loadData.sql
+:r  .\scripts\sq_eliminateCandidates.sql

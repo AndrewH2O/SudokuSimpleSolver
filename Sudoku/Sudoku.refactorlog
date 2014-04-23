@@ -112,4 +112,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="[start]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="3276107f-fb75-483b-af01-548b083e6368" ChangeDateTime="04/23/2014 16:00:31">
+    <Property Name="ElementName" Value="[dbo].[candidates].[digit_current]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[candidates]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="digit_next" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="60452a51-d2b4-4bdf-ae4b-5b3c28fddf7e" ChangeDateTime="04/23/2014 16:01:04">
+    <Property Name="ElementName" Value="[dbo].[candidates].[digit_output]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[candidates]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[digit_current]" />
+  </Operation>
 </Operations>
