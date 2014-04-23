@@ -1,0 +1,2 @@
+﻿
+exec sp_initialise

@@ -1,2 +1,4 @@
-﻿--use Sudoku
---select * from dbo.valid_digit_inputs WHERE digit>0;
+﻿use Sudoku
+select * from dbo.constants
+exec sp_initialiseConstants
+exec sp_initialise

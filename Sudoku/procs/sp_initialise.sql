@@ -1,18 +1,21 @@
 ﻿CREATE PROCEDURE [dbo].[sp_initialise]
 	
 AS
+	
+	exec sp_initialiseConstants;
+	
 	DELETE FROM dbo.lookupRCB;
 	DELETE FROM dbo.candidate_digits;
 	DELETE FROM dbo.candidates;
 	DELETE FROM dbo.cells;
-
+	
+	--counters
 	DECLARE @counterMIN int, @counterMAX int, @counter_cell int;
 	DECLARE @minDigitVal int, @maxDigitVal int, @counter_digit int;
-	
-
+	--defaults
 	DECLARE @defaultValue int;
 	--candidate digits
-	DECLARE @numberPossibles int, @digitValueNotSet bit;
+	DECLARE @numberPossibles int, @candidateDigitSet bit;
 	--lookups	
 	DECLARE @col int, @row int, @block int, @offset int;
 
@@ -21,7 +24,7 @@ AS
 	set @counterMAX = (select co.TOTAL_CELL_COUNT from constants as co);
 	set @defaultValue = (select co.DIGIT_OUTPUT_NOTKNOWN from constants as co);
 	set @numberPossibles = (select co.CAGE_SIZE from constants as co)
-	set @digitValueNotSet = (select co.CANDIDATE_DIGIT_NOTSET from constants as co)
+	set @candidateDigitSet = (select co.CANDIDATE_DIGIT_SET from constants as co)
 	set @minDigitVal = (select co.FIRST_DIGIT_ID from constants as co);
 	set @maxDigitVal = (select co.CAGE_SIZE from constants as co);
 
@@ -35,7 +38,7 @@ AS
 			set @counter_digit = @minDigitVal;
 			while @counter_digit<=@maxDigitVal
 				begin
-						insert into dbo.candidate_digits (cellID,digit,value) values (@counter_cell,@counter_digit,@digitValueNotSet)
+						insert into dbo.candidate_digits (cellID,digit,value) values (@counter_cell,@counter_digit,@candidateDigitSet)
 						set @counter_digit=@counter_digit+1;
 				end
 			set @counter_cell = @counter_cell+1;

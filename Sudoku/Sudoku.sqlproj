@@ -69,11 +69,17 @@
     <Build Include="procs\sp_initialise.sql" />
     <Build Include="tables\constants.sql" />
     <Build Include="tables\valid_digits_in_Soln.sql" />
+    <Build Include="procs\sp_initialiseConstants.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Sudoku.refactorlog" />
   </ItemGroup>
   <ItemGroup>
     <None Include="scratchpad.sql" />
+    <None Include="initialiseData.sql" />
+    <None Include="Sudoku.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment1.sql" />
   </ItemGroup>
 </Project>
