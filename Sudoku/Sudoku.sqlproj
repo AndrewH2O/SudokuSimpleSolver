@@ -79,6 +79,10 @@
     <Build Include="procs\sp_displayNumberOfDigitsToFind.sql" />
     <Build Include="procs\sp_insertCandidates.sql" />
     <Build Include="procs\sp_eliminateCandidates.sql" />
+    <Build Include="procs\sp_setDigitAndClearCandidateByCellID.sql" />
+    <Build Include="procs\sp_resetDigitAndSetCandidateByCellID.sql" />
+    <Build Include="procs\sp_rule_nakedSingle.sql" />
+    <Build Include="procs\sp_display_digits_current.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Sudoku.refactorlog" />
@@ -86,9 +90,12 @@
   <ItemGroup>
     <None Include="scratchpad.sql" />
     <None Include="Sudoku.publish.xml" />
-    <None Include="scratchScripts\testEliminateCandidates.sql" />
+    <None Include="scratchScripts\test_EliminateCandidates.sql" />
     <None Include="scratchScripts\test_InsertCandidates.sql" />
     <None Include="scripts\sq_eliminateCandidates.sql" />
+    <None Include="scratchScripts\test_rule_NakedSingle.sql" />
+    <None Include="scratchScripts\test setReset digitsCandidates.sql" />
+    <None Include="scratchScripts\test_solver.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
