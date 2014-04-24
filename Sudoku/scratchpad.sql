@@ -54,3 +54,19 @@ From dbo.cells as ce
 
 exec sp_displayStart;
 exec sp_displayNumberOfDigitsToFind
+GO
+
+DECLARE @tBits table
+(
+	id int,
+	digit bit
+)
+
+insert into @tBits (id,digit) values (1,0);
+insert into @tBits (id,digit) values (2,0);
+insert into @tBits (id,digit) values (3,1);
+insert into @tBits (id,digit) values (4,1);
+insert into @tBits (id,digit) values (5,0);
+
+select * from @tBits;
+select count(*) from @tBits where digit<>0;
