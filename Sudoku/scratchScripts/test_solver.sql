@@ -20,16 +20,16 @@
 DECLARE @result int;
 
 
---set @result=0;
---while @result<>-1
---begin
---	exec @result = sp_rule_nakedSingle;
---	if(@result<>-1) 
---	begin
---		select 'rule "naked singles" found ' + CAST(@result as varchar(2))  + ' digits';
---		--exec sp_eliminateCandidates;
---	end
---end
+set @result=0;
+while @result<>-1
+begin
+	exec @result = sp_rule_nakedSingle;
+	if(@result<>-1) 
+	begin
+		select 'rule "naked singles" found ' + CAST(@result as varchar(2))  + ' digits';
+		--exec sp_eliminateCandidates;
+	end
+end
 
 
 
@@ -43,6 +43,21 @@ begin
 		--exec sp_eliminateCandidates;
 	end
 end
+
+
+set @result=0
+while @result<>-1
+begin
+	exec @result=sp_rule_hiddenSingles2;
+	if(@result<>-1) 
+	begin
+		select 'rule "hidden single type 2" found ' + CAST(@result as varchar(2))  + ' digits';
+		--exec sp_eliminateCandidates;
+	end
+end
+
+
+
 
 
 --select * from candidates
