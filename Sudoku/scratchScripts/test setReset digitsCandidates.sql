@@ -26,7 +26,7 @@ where ca.cellID = 7
 
 select * from candidates where cellID=7
 
-exec sp_setDigitAndClearCandidateByCellID 7,8
+exec [sp_updateDigit_ClearCandidate_byCellID] 7,8
 exec sp_resetDigitAndSetCandidateByCellID 7,8
 -------------------------------------------------------------------------------------------
 --reset possible candidate for a cell

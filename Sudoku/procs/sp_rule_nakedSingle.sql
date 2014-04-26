@@ -8,6 +8,9 @@ AS
 DECLARE @counter int;
 DECLARE @number_found int;
 DECLARE @currentCellID int, @currentDigit int;
+DECLARE @BAILOUT int;
+DECLARE @BAILOUTCounter int;
+
 
 DECLARE @digitsFound table 
 (
@@ -18,6 +21,12 @@ DECLARE @digitsFound table
 	rowNumber int
 );
 
+delete @digitsFound;
+
+set @BAILOUT=100;
+set @BAILOUTCounter=0;
+
+SET NOCOUNT ON;
 
 --find instances where the number of possibles is 1 and then 
 --for those where the digit is set as a possible candidate
@@ -48,11 +57,20 @@ else
 		set @counter=1;
 		while @counter<=@number_found
 		begin
-			--select * from @digitsFound where @counter=rowNumber
+			select * from @digitsFound where @counter=rowNumber
 			set @currentCellID=(select cellID from @digitsFound where @counter = rowNumber);
 			set @currentDigit=(select digit from @digitsFound where @counter = rowNumber);
 		
-			exec sp_setDigitAndClearCandidateByCellID @currentCellID, @currentDigit;
+			exec [sp_setDigit_resetCandidates_byCellID] @currentCellID, @currentDigit;
+
+			
+
+			set @BAILOUTCounter=@BAILOUTCounter+1;
+			if(@BAILOUTCounter>@BAILOUT)
+			begin
+				select '****** Naked Single Bailout ****************'
+				return -1;
+			end
 
 			set @counter = @counter+1;
 		end
@@ -62,7 +80,10 @@ else
 
 --set the digit current to equal digit next on those cells where a digit 
 --has been found
-update candidates
-set digit_current=digit_next
-from candidates where digit_current<>digit_next
+	update candidates
+				set digit_current=digit_next
+				from candidates where digit_current<>digit_next
+
+				exec sp_eliminateCandidates;
+
 RETURN @number_found

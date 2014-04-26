@@ -21,7 +21,7 @@ From dbo.cells as c
 	c.id = l.cellID
 GROUP BY s_row
 
-exec sp_displayStart
+exec [sp_display_Start]
 
 
 select 'board showing number of digits to find'
@@ -52,8 +52,8 @@ From dbo.cells as ce
 	ce.id = ca.cellID
 
 
-exec sp_displayStart;
-exec sp_displayNumberOfDigitsToFind
+exec [sp_display_Start];
+exec [sp_display_NumberOfDigitsToFind]
 GO
 
 DECLARE @tBits table

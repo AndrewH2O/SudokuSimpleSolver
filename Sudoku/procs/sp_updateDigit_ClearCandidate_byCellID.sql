@@ -1,9 +1,23 @@
-﻿CREATE PROCEDURE [dbo].[sp_setDigitAndClearCandidateByCellID]
+﻿
+--updates candidate_digits
+CREATE PROCEDURE [dbo].[sp_updateDigit_ClearCandidate_byCellID]
 	@cellID int,
-	@digit int
+	@digit int,
+	@debug int=0
 AS
-	DECLARE @candidateDigitNotSet bit;
+	DECLARE @candidateDigitNotSet bit, @numberPossibles int, @candidatesStr nvarchar(50);
 	set @candidateDigitNotSet = (select CANDIDATE_DIGIT_NOTSET from constants);
+	set @candidatesStr = (select co.CANDIDATES_STR_NA from dbo.constants as co);
+
+
+	SET NOCOUNT ON;
+
+	if(@debug>0)
+	begin
+		set @numberPossibles=(select count(*) from candidate_digits where cellID=@cellID and value<>@candidateDigitNotSet);
+		print concat('updating c,d,poss ',@cellID,',',@digit,',',@numberPossibles);
+	end
+
 
 	--set digit and clear possible candidate by cellID and digit
 	--set candidate to not set
@@ -13,11 +27,18 @@ AS
 	on cd.cellID = ca.cellID
 	where ca.cellID = @cellID and cd.digit=@digit 
 
-	--update numberPossibles and set digit_next
+	--update candidate string
+	EXEC sp_convert_candidatesToStr_byCellID 
+			@cellID,
+			@out_candidatesAsStr = @candidatesStr output;
+
+	
+		
 	update ca
 	set ca.numberPossibles=
 		(select count(*) from candidate_digits where cellID=@cellID and value<>@candidateDigitNotSet),
-		ca.digit_next = @digit
+		ca.digit_next = @digit,
+		ca.asStr = @candidatesStr
 	from candidates as ca inner join candidate_digits as cd 
 	on ca.cellID = cd.cellID
 	where ca.cellID=@cellID 

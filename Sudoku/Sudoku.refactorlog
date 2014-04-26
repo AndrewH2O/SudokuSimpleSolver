@@ -133,4 +133,60 @@
     <Property Name="ParentElementType" Value="SqlSchema" />
     <Property Name="NewName" Value="[sp_resetDigitAndSetCandidateByCellID]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="8407dc18-7794-4af7-ba2b-4d888bd64af9" ChangeDateTime="04/25/2014 21:50:24">
+    <Property Name="ElementName" Value="[dbo].[sp_display_Candiadtes_byCellID]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[sp_display_Candidates_byCellID]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="349acb32-3458-482f-91b5-da580bd3e5df" ChangeDateTime="04/26/2014 10:52:28">
+    <Property Name="ElementName" Value="[dbo].[sp_displayNumberOfDigitsToFind]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[sp_display_NumberOfDigitsToFind]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3a51f0b5-45b3-4f0a-ad4d-427fa2ce8a9a" ChangeDateTime="04/26/2014 10:52:44">
+    <Property Name="ElementName" Value="[dbo].[sp_displayStart]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[sp_display_Start]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="01d2bc4d-4549-44b1-abc0-0be4be3c5cca" ChangeDateTime="04/26/2014 10:54:07">
+    <Property Name="ElementName" Value="[dbo].[sp_display_Candidates_byCellID]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[sp_display_candidates_byCellID]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="33eb77fc-29e3-4f92-8b50-3aa6e9371c98" ChangeDateTime="04/26/2014 10:54:32">
+    <Property Name="ElementName" Value="[dbo].[sp_display_candidatesByCol]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[sp_display_candidates_byCol]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fc96bcf8-ab9f-433d-8075-47f310bf4c75" ChangeDateTime="04/26/2014 11:25:15">
+    <Property Name="ElementName" Value="[dbo].[sp_display_candidates_byCellID]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[sp_convert_candidatesToStr_byCellID]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5497bb34-bad4-436c-b989-b1bf216eaf77" ChangeDateTime="04/26/2014 14:51:53">
+    <Property Name="ElementName" Value="[dbo].[sp_setDigitAndClearCandidateByCellID]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[sp_updateDigitAndClearCandidateByCellID]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d8c8319e-0ec2-409a-9676-aca852bf6285" ChangeDateTime="04/26/2014 14:55:44">
+    <Property Name="ElementName" Value="[dbo].[sp_updateDigitAndClearCandidateByCellID]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[sp_updateDigit_ClearCandidate_byCellID]" />
+  </Operation>
 </Operations>

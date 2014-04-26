@@ -75,14 +75,19 @@
     <None Include="scripts\sq_initialiseData.sql" />
     <None Include="scripts\sq_loadData.sql" />
     <Build Include="procs\sp_loadData.sql" />
-    <Build Include="procs\sp_displayStart.sql" />
-    <Build Include="procs\sp_displayNumberOfDigitsToFind.sql" />
+    <Build Include="procs\sp_display_Start.sql" />
+    <Build Include="procs\sp_display_NumberOfDigitsToFind.sql" />
     <Build Include="procs\sp_insertCandidates.sql" />
     <Build Include="procs\sp_eliminateCandidates.sql" />
-    <Build Include="procs\sp_setDigitAndClearCandidateByCellID.sql" />
+    <Build Include="procs\sp_updateDigit_ClearCandidate_byCellID.sql" />
     <Build Include="procs\sp_resetDigitAndSetCandidateByCellID.sql" />
     <Build Include="procs\sp_rule_nakedSingle.sql" />
     <Build Include="procs\sp_display_digits_current.sql" />
+    <Build Include="procs\sp_get_cellIDS_xHatching_by_BlockAndDigit.sql" />
+    <Build Include="procs\sp_rule_hiddenSingles.sql" />
+    <Build Include="procs\sp_convert_candidatesToStr_byCellID.sql" />
+    <Build Include="procs\sp_display_candidates.sql" />
+    <Build Include="procs\sp_setDigit_resetCandidates_byCellID.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Sudoku.refactorlog" />
@@ -96,6 +101,9 @@
     <None Include="scratchScripts\test_rule_NakedSingle.sql" />
     <None Include="scratchScripts\test setReset digitsCandidates.sql" />
     <None Include="scratchScripts\test_solver.sql" />
+    <None Include="scratchScripts\test_rule_HiddenSingles.sql" />
+    <None Include="scratchScripts\test_printingCandidates.sql" />
+    <None Include="scratchScripts\test_rules.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

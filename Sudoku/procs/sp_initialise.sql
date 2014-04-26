@@ -17,7 +17,7 @@ AS
 	--defaults
 	DECLARE @defaultValue int;
 	--candidate digits
-	DECLARE @numberPossibles int, @candidateDigitSet bit;
+	DECLARE @numberPossibles int, @candidateDigitSet bit, @candidateStr nvarchar(50);
 	--lookups	
 	DECLARE @col int, @row int, @block int, @offset int;
 
@@ -29,14 +29,14 @@ AS
 	set @candidateDigitSet = (select co.CANDIDATE_DIGIT_SET from constants as co)
 	set @minDigitVal = (select co.FIRST_DIGIT_ID from constants as co);
 	set @maxDigitVal = (select co.CAGE_SIZE from constants as co);
-
+	set @candidateStr=(select co.CANDIDATES_STR_NA from dbo.constants as co);
 	
 	--initialise cellIDs and set everything else to default values
 	set @counter_cell = @counterMIN;
 	while @counter_cell<=@counterMAX
 		begin
 			INSERT INTO dbo.cells(id,start) VALUES (@counter_cell,@defaultValue);
-			INSERT INTO dbo.candidates(cellID,numberPossibles,[digit_current],[digit_next]) VALUES(@counter_cell,@numberPossibles,@defaultValue,@defaultValue)
+			INSERT INTO dbo.candidates(cellID,numberPossibles,[digit_current],[digit_next],asStr) VALUES(@counter_cell,@numberPossibles,@defaultValue,@defaultValue,@candidateStr)
 			set @counter_digit = @minDigitVal;
 			while @counter_digit<=@maxDigitVal
 				begin

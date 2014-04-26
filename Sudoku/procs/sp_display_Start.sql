@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[sp_displayStart]
+﻿CREATE PROCEDURE [dbo].[sp_display_Start]
 AS
 select 'board showing start'
 Select s_row as 'r/c',

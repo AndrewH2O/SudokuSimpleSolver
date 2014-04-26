@@ -4,6 +4,8 @@
 DECLARE @counter int;
 DECLARE @number_found int;
 DECLARE @currentCellID int, @currentDigit int;
+DECLARE @BAILOUT int;
+DECLARE @BAILOUTCounter int;
 
 DECLARE @digitsFound table 
 (
@@ -13,6 +15,9 @@ DECLARE @digitsFound table
 	value bit,
 	rowNumber int
 );
+
+set @BAILOUT=100;
+set @BAILOUTCounter=0;
 
 with temp as
 (
@@ -40,7 +45,15 @@ else
 			set @currentCellID=(select cellID from @digitsFound where @counter = rowNumber);
 			set @currentDigit=(select digit from @digitsFound where @counter = rowNumber);
 		
-			exec sp_setDigitAndClearCandidateByCellID @currentCellID, @currentDigit;
+			exec [sp_updateDigit_ClearCandidate_byCellID] @currentCellID, @currentDigit;
+			
+			set @BAILOUTCounter=@BAILOUTCounter+1;
+			if(@BAILOUTCounter>@BAILOUT)
+			begin
+				select '****** Naked Single Bailout ****************'
+				return -1;
+			end
+
 
 			set @counter = @counter+1;
 		end
@@ -48,9 +61,11 @@ else
 	end
 
 update candidates
-set digit_current=digit_next
-from candidates where digit_current<>digit_next
+	   set digit_current=digit_next
+	   from candidates where digit_current<>digit_next
 
+exec sp_eliminateCandidates
 
+return @number_found;
 -----------------------------------------------------------------------------------------------
 

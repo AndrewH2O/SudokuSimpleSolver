@@ -10,6 +10,7 @@ DECLARE @statePossCandidate bit, @stateNotACandidate bit, @startDigit int;
 DECLARE @minCellID int, @maxCellID int;
 DECLARE @maxDigitValue int, @minDigitValue int;
 DECLARE @digitUnknown int, @maxNumberPossibleCandidates int, @candidatesNA int;
+DECLARE @candidatesAsStrAll nvarchar(50),@candidatesAsStrNA nvarchar(50);
 
 --set variables to constant values
 set @statePossCandidate =(select co.CANDIDATE_DIGIT_SET from constants as co); 
@@ -17,6 +18,8 @@ set @stateNotACandidate =(select co.CANDIDATE_DIGIT_NOTSET from constants as co)
 set @candidatesNA = (select co.CANDIDATES_NA from constants as co);
 set @digitUnknown = (select co.DIGIT_OUTPUT_NOTKNOWN from constants as co);
 set @maxNumberPossibleCandidates = (select co.CAGE_SIZE from constants as co);
+set @candidatesAsStrAll = (select co.CANDIDATES_STR_ALL from constants as co);
+set @candidatesAsStrNA = (select co.CANDIDATES_STR_NA from constants as co);
 
 set @minCellID =(select co.FIRST_CELL_ID from constants as co);
 set @maxCellID =(select co.TOTAL_CELL_COUNT from constants as co);
@@ -36,7 +39,7 @@ begin
 		--set candidates no digit given to use
 		IF (@startDigit) = @digitUnknown 
 			begin
-				insert into dbo.candidates (cellID,numberPossibles,[digit_current],[digit_next]) values (@outerCtr,@maxNumberPossibleCandidates,@startDigit,@digitUnknown);
+				insert into dbo.candidates (cellID,numberPossibles,[digit_current],[digit_next],asStr) values (@outerCtr,@maxNumberPossibleCandidates,@startDigit,@digitUnknown,@candidatesAsStrAll);
 				set @innerCtr=@minDigitValue;
 				while @innerCtr<=@maxDigitValue
 				begin
@@ -47,7 +50,7 @@ begin
 			end
 		ELSE
 			begin 
-				insert into dbo.candidates (cellID,numberPossibles,[digit_current],[digit_next]) values (@outerCtr,@candidatesNA,@startDigit,@startDigit);
+				insert into dbo.candidates (cellID,numberPossibles,[digit_current],[digit_next],asStr) values (@outerCtr,@candidatesNA,@startDigit,@startDigit,@candidatesAsStrNA);
 				--unwind loop for setting digits
 				set @innerCtr=@minDigitValue;
 				while @innerCtr<=@maxDigitValue

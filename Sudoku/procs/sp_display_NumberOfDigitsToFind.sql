@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[sp_displayNumberOfDigitsToFind]
+﻿CREATE PROCEDURE [dbo].[sp_display_NumberOfDigitsToFind]
 AS
 		
 select 'board showing number of digits to find'

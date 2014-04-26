@@ -11,6 +11,7 @@ DECLARE @RowIntersect int, @ColIntersect int, @BlockIntersect int
 DECLARE @emptyState int, @currentcellID int, @countDelta int
 DECLARE @cageSize int
 DECLARE @minCellID int, @maxCellID int
+DECLARE @candidatesStr nvarchar(50)
 
 
 --table used to record the digits found in a cells 'peer' where 
@@ -29,13 +30,17 @@ set @cageSize = (select co.CAGE_SIZE from constants as co);
 set @minCellID =(select co.FIRST_CELL_ID from constants as co);
 set @maxCellID =(select co.TOTAL_CELL_COUNT from constants as co);
 set @emptyState = (select co.DIGIT_OUTPUT_NOTKNOWN from dbo.constants as co);
+set @candidatesStr = (select co.CANDIDATES_STR_NA from dbo.constants as co);
+
+
+SET NOCOUNT ON;
 
 --cycle through cells and for those where no digits have been found eliminate
 --candidates for each cell where there are digits in its peers.
 set @currentcellID = @minCellID;
 while @currentcellID<=@maxCellID
 begin
-	SET NOCOUNT ON;
+	
 	--eliminate candidates where no digit has been found
 	if(select ca.[digit_current] from dbo.candidates as ca where ca.cellID = @currentcellID) = @emptyState 
 	begin
@@ -90,8 +95,10 @@ begin
 		----select @countDelta as countDelta;
 		--END DEBUG
 
+		
+
 		update ca
-		set NumberPossibles = @cageSize - @countDelta
+		set numberPossibles = @cageSize - @countDelta
 		from dbo.candidates as ca
 		where ca.cellID = @currentcellID;
 		
@@ -113,7 +120,17 @@ begin
 		where 
 			cd.cellID = @currentcellID and
 			cd.digit in (select digit from @tDigitsToMarkOff);
-	
+		
+		--update candidate string
+		EXEC sp_convert_candidatesToStr_byCellID 
+			@currentcellID,
+			@out_candidatesAsStr = @candidatesStr output;
+
+		update ca
+		set ca.asStr=@candidatesStr
+		from dbo.candidates as ca
+		where ca.cellID=@currentcellID
+
 	end
 
 	--increment cellID
