@@ -12,12 +12,15 @@ set @occurence=1;
 
 DECLARE @freq table(
 	cellID int,
-	digit int
+	digit int,
+	f_row int,
+	f_col int,
+	f_block int
 )
 
 delete @freq 
 
-insert into @freq (cellID,digit)
+insert into @freq (cellID,digit,f_row,f_col,f_block)
 exec [sp_get_freqDigit_byOccurence] @occurence;
 
 set @number_found=(select count(*) from @freq);
