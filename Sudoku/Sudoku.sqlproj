@@ -107,6 +107,7 @@
     <None Include="scratchScripts\test_printingCandidates.sql" />
     <None Include="scratchScripts\test_rules.sql" />
     <None Include="scratchScripts\test_digitFreq.sql" />
+    <None Include="scratchScripts\test_rule_LockedCandidates.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
