@@ -22,7 +22,8 @@ DECLARE @freq table(
 	f_xrefCol int,
 	f_xrefBlock int,
 	f_subRow int,
-	f_subCol int
+	f_subCol int,
+	primary key(cellID, digit, f_row, f_col, f_block)
 )
 
 delete @freq 

@@ -22,7 +22,8 @@ DECLARE @candidatesStr nvarchar(50)
 DECLARE @tDigitsToMarkOff table
 (
 	cellID int,
-	digit int
+	digit int,
+	primary key (cellID,digit)
 );
 
 

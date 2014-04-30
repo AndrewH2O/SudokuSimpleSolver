@@ -75,7 +75,7 @@ begin
 	if(@result<>-1) 
 	begin
 		select 'rule "locked candidates type 1" marked of  ' + CAST(@result as varchar(2))  + ' candidates';
-		--exec sp_eliminateCandidates;
+		
 	end
 end
 

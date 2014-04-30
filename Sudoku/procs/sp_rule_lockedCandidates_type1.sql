@@ -30,7 +30,8 @@ DECLARE @freq table(
 	f_xrefCol int,
 	f_xrefBlock int,
 	f_subRow int,
-	f_subCol int
+	f_subCol int,
+	primary key(cellID, digit, f_row, f_col, f_block)
 )
 
 --used to store those digits that appear within a single sub row or column
@@ -43,9 +44,9 @@ DECLARE @possLocked table
 	pl_sub_rowcol int
 )
 
---use to store cellID and digits that can be eliminated. These lay in the 
+--use to store cellID and digits that can be eliminated. These lay  
 --in a row/col that intersects with a given block where the region of
---the row lays beyond the block, ie 'except region'. These digits 
+--the row lays beyond the block, ie 'except region'. These digits candidates
 --can be eliminated. (The digits also appear in the region intersecting the
 --block and represent the only occurences of those digits in the block)
 DECLARE @digitsToUpdate table
@@ -54,7 +55,8 @@ DECLARE @digitsToUpdate table
 	d_digit int,
 	d_rowcol int,
 	d_block int,
-	d_id int
+	d_id int,
+	primary key (d_cellID,d_digit)
 )
 
 delete @freq 

@@ -18,7 +18,7 @@ DECLARE @BAILOUTCounter int;
 
 DECLARE @possibleIDs table
 (
-	cellID int
+	cellID int primary key
 );
 
 set @digit_counterMin = (select FIRST_DIGIT_ID from constants);

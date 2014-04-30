@@ -13,7 +13,7 @@ DECLARE @digitsFound table
 	cellID int,
 	digit int,
 	value bit,
-	rowNumber int
+	rowNumber int primary key
 );
 
 set @BAILOUT=100;
