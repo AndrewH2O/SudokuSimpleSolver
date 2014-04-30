@@ -92,6 +92,7 @@
     <Build Include="procs\sp_rule_hiddenSingles2.sql" />
     <Build Include="procs\sp_get_digitsThatOccur_byFreqRange.sql" />
     <Build Include="procs\sp_rule_lockedCandidates_type1.sql" />
+    <Build Include="procs\sp_validate_board.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Sudoku.refactorlog" />
@@ -112,6 +113,7 @@
     <None Include="scratchScripts\test_rule_LockedCandidates.sql" />
     <None Include="scratchScripts\test_init_subRowColByBlock.sql" />
     <None Include="scratchScripts\test_rule_hiddenSingle2 v2.sql" />
+    <None Include="Readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

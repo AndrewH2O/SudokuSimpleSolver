@@ -98,9 +98,11 @@ begin
 		set @isSoln=0;
 end
 
-if @isSoln=1 
+exec @result=sp_validate_board
+if (@isSoln=1 and @result=0)
 	select 'solution found';
 	else 
 	select 'no solution found';
 --select * from candidates
+
 
