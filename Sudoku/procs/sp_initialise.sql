@@ -19,7 +19,7 @@ AS
 	--candidate digits
 	DECLARE @numberPossibles int, @candidateDigitSet bit, @candidateStr nvarchar(50);
 	--lookups	
-	DECLARE @col int, @row int, @block int, @offset int;
+	DECLARE @col int, @row int, @block int, @offset int, @blockSize int, @subRow int, @subCol int;
 
 
 	set @counterMIN = (select co.FIRST_CELL_ID from constants as co);
@@ -30,7 +30,10 @@ AS
 	set @minDigitVal = (select co.FIRST_DIGIT_ID from constants as co);
 	set @maxDigitVal = (select co.CAGE_SIZE from constants as co);
 	set @candidateStr=(select co.CANDIDATES_STR_NA from dbo.constants as co);
-	
+	set @blockSize = @maxDigitVal/3;
+
+	delete dbo.lookupRCB;
+
 	--initialise cellIDs and set everything else to default values
 	set @counter_cell = @counterMIN;
 	while @counter_cell<=@counterMAX
@@ -45,6 +48,8 @@ AS
 				end
 			set @counter_cell = @counter_cell+1;
 		end;
+
+	
 
 	--update lookup data
 	set @counter_cell = @counterMIN;
@@ -68,7 +73,11 @@ AS
 				when @row<=9 and @col<=9 then 9
 			end);
 			
-			INSERT INTO dbo.lookupRCB (cellID,s_row,s_col,s_block) values (@counter_cell,@row,@col,@block);
+			set @subRow = @row-((@row-1)/@blockSize * @blockSize);
+			set @subCol = @col-((@col-1)/@blockSize * @blockSize);
+
+			INSERT INTO dbo.lookupRCB (cellID,s_row,s_col,s_block,s_subRow,s_subCol) 
+				values (@counter_cell,@row,@col,@block,@subRow,@subCol);
 
 			set @offset=@offset+1;
 			set @counter_cell = @counter_cell+1;

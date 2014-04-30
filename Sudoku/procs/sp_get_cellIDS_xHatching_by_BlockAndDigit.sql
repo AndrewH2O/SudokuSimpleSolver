@@ -9,7 +9,7 @@ CREATE PROCEDURE [dbo].[sp_get_cellIDS_xHatching_by_BlockAndDigit]
 	@digit int, --digit 1-9
 	@flag int=0 --0 all cells in block where no digit, 1 rows cross hatch with rows, 2 cols cross hatch with rows, 3 both cross hatch with rows and cols
 AS
-
+SET NOCOUNT ON;
 DECLARE @digitNotFound int;
 set @digitNotFound=(select DIGIT_OUTPUT_NOTKNOWN from constants);
 

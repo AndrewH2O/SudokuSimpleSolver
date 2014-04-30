@@ -88,8 +88,10 @@
     <Build Include="procs\sp_convert_candidatesToStr_byCellID.sql" />
     <Build Include="procs\sp_display_candidates.sql" />
     <Build Include="procs\sp_setDigit_resetCandidates_byCellID.sql" />
-    <Build Include="procs\sp_get_freqDigit_byOccurence.sql" />
+    <Build Include="procs\sp_get_digitsThatOccur_byFreq.sql" />
     <Build Include="procs\sp_rule_hiddenSingles2.sql" />
+    <Build Include="procs\sp_get_digitsThatOccur_byFreqRange.sql" />
+    <Build Include="procs\sp_rule_lockedCandidates_type1.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Sudoku.refactorlog" />
@@ -108,6 +110,8 @@
     <None Include="scratchScripts\test_rules.sql" />
     <None Include="scratchScripts\test_digitFreq.sql" />
     <None Include="scratchScripts\test_rule_LockedCandidates.sql" />
+    <None Include="scratchScripts\test_init_subRowColByBlock.sql" />
+    <None Include="scratchScripts\test_rule_hiddenSingle2 v2.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

@@ -1,6 +1,8 @@
-﻿Use Sudoku
-
---exec sp_display_candidates
+﻿CREATE PROCEDURE [dbo].[sp_rule_lockedCandidates_type1]
+	
+AS
+SET NOCOUNT ON;	
+	--exec sp_display_candidates
 /*
 Rule locked candidates looks at each block and intersecting row or column
 and says that where digits can only occur within that block within the intersect 
@@ -63,7 +65,12 @@ insert into @freq (cellID,digit,f_row,f_col,f_block, f_xrefRow, f_xrefCol, f_xre
 exec [sp_get_digitsThatOccur_byFreqRange] ;
 
 --intersecting rows
-select '---ROWS-----'
+
+
+----DEBUG
+--select '---ROWS-----'
+----end DEBUG
+
 delete @possLocked
 delete @digitsToUpdate
 
@@ -79,15 +86,17 @@ delete @digitsToUpdate
 --only one row other aggregates would also work)
 --The result is inserted into  @possLocked temp table
 insert into @possLocked (pl_block,pl_digit,pl_rowcol,pl_sub_rowcol)
-select f_block, f.digit, min(f.f_xrefRow) as xrow, min(distinct f.f_subRow) as subRow 
-from @freq as f where f.f_block<>0 
-group by  f_block, f.digit
-having count(distinct f.f_subRow)=1
-order by f_block
+	select f_block, f.digit, min(f.f_xrefRow) as xrow, min(distinct f.f_subRow) as subRow 
+	from @freq as f where f.f_block<>0 
+		group by  f_block, f.digit
+		having count(distinct f.f_subRow)=1
+		order by f_block
 
+----DEBUG
+--select pl.pl_block, pl.pl_digit, pl.pl_rowcol from @possLocked as pl
+--order by pl_block
+----end DEBUG
 
-select pl.pl_block, pl.pl_digit, pl.pl_rowcol from @possLocked as pl
-order by pl_block
 
 --look at the 'except' region of the row falling outside the block
 --and where the digit occurs get the corresponding cellid and digit
@@ -100,43 +109,51 @@ insert into @digitsToUpdate (d_cellID,d_digit,d_rowcol,d_block,d_id)
 		join @possLocked as p on l.s_row = p.pl_rowcol
 		where cd.value=1 and l.s_block<>p.pl_block and cd.digit=p.pl_digit
 		order by l.s_row
-
-select * from @digitsToUpdate
+----DEBUG
+--select * from @digitsToUpdate
+----end DEBUG
 
 set @counterMin=1;
 set @counterMax=(select count(*) from @digitsToUpdate);
 
 while @counterMin<=@counterMax
 if(@counterMax>0)
-begin
 	begin
-		set @cellID = (select d.d_cellID from @digitsToUpdate as d where d.d_id=@counterMin)
-		set @digit = (select d.d_digit from @digitsToUpdate as d where d.d_id=@counterMin)
-		select 'to update: '
-		select @cellID, @digit
-		exec sp_updateDigit_ClearCandidate_byCellID @cellID, @digit
-		set @counterMin=@counterMin+1;
+		begin
+			set @cellID = (select d.d_cellID from @digitsToUpdate as d where d.d_id=@counterMin)
+			set @digit = (select d.d_digit from @digitsToUpdate as d where d.d_id=@counterMin)
+			----DEBUG
+			--select 'to update: '
+			--select @cellID, @digit
+			----end DEBUG
+
+			exec sp_updateDigit_ClearCandidate_byCellID @cellID, @digit
+			set @counterMin=@counterMin+1;
+		end
 	end
-end
 
 
 
 --intersecting cols
 --same as above but acts on the columns
-select '---COLS-----'
+
+----DEBUG
+--select '---COLS-----'
+----end DEBUG
 delete @possLocked
 delete @digitsToUpdate
  
 insert into @possLocked (pl_block,pl_digit,pl_rowcol,pl_sub_rowcol) 
-select f_block, f.digit, min(f.f_xrefCol) as xcol, min(distinct f.f_subCol) as subCol 
-from @freq as f where f.f_block<>0 
-group by  f_block, f.digit
-having count(distinct f.f_subCol)=1
-order by f_block
+	select f_block, f.digit, min(f.f_xrefCol) as xcol, min(distinct f.f_subCol) as subCol 
+		from @freq as f where f.f_block<>0 
+		group by  f_block, f.digit
+		having count(distinct f.f_subCol)=1
+		order by f_block
 
-
-select pl.pl_block, pl.pl_digit, pl.pl_rowcol from @possLocked as pl
-order by pl_block
+----DEBUG
+--select pl.pl_block, pl.pl_digit, pl.pl_rowcol from @possLocked as pl 
+--order by pl_block
+----end DEBUG
 
 insert into @digitsToUpdate (d_cellID,d_digit,d_rowcol,d_block,d_id)
 	select cd.cellID, cd.digit, l.s_col, l.s_block, row_number() over (order by cd.cellID) as rn 
@@ -146,23 +163,27 @@ insert into @digitsToUpdate (d_cellID,d_digit,d_rowcol,d_block,d_id)
 		where cd.value=1 and l.s_block<>p.pl_block and cd.digit=p.pl_digit
 		order by l.s_col
 
-select * from @digitsToUpdate
+----DEBUG
+--select * from @digitsToUpdate
+----end DEBUG
 
 set @counterMin=1;
 set @counterMax=(select count(*) from @digitsToUpdate);
-if(@counterMax>0)
-begin
-	while @counterMin<=@counterMax
+
+if(@counterMax=0)RETURN -1
+else
 	begin
-		set @cellID = (select d.d_cellID from @digitsToUpdate as d where d.d_id=@counterMin)
-		set @digit = (select d.d_digit from @digitsToUpdate as d where d.d_id=@counterMin)
-		select 'to update: '
-		select @cellID, @digit
-		exec sp_updateDigit_ClearCandidate_byCellID @cellID, @digit
-		set @counterMin=@counterMin+1;
+		while @counterMin<=@counterMax
+		begin
+			set @cellID = (select d.d_cellID from @digitsToUpdate as d where d.d_id=@counterMin)
+			set @digit = (select d.d_digit from @digitsToUpdate as d where d.d_id=@counterMin)
+			----DEBUG
+			--select 'to update: '
+			--select @cellID, @digit
+			----end DEBUG
+			exec sp_updateDigit_ClearCandidate_byCellID @cellID, @digit
+			set @counterMin=@counterMin+1;
+		end
 	end
-end
-
-
-exec sp_display_candidates
+RETURN @counterMax
 

@@ -70,3 +70,24 @@ insert into @tBits (id,digit) values (5,0);
 
 select * from @tBits;
 select count(*) from @tBits where digit<>0;
+
+
+---------------------------------------
+declare @cellID int, @digit int
+declare  @t table
+( cellid int, digit int, id int)
+
+insert into @t (id,cellid,digit) values
+(1,10,5),
+(2,10,5),
+(3,10,5),
+(4,16,8)
+
+set @cellID = (select min(cellID) from @t);
+set @digit = (select min(digit) from @t where cellID=@cellID);
+
+select @cellID, @digit
+
+delete @t
+
+select count(*) from @t

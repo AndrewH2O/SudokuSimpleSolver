@@ -3,13 +3,14 @@
 	@digit int,
 	@debug int=0
 AS
+	SET NOCOUNT ON;
 	DECLARE @candidateDigitNotSet bit, @numberPossibles int, @candidatesStr nvarchar(50);
 	
 	set @candidateDigitNotSet = (select CANDIDATE_DIGIT_NOTSET from constants);
 	set @candidatesStr = (select co.CANDIDATES_STR_NA from dbo.constants as co);
 
 
-	SET NOCOUNT ON;
+	
 
 	if(@debug>0)
 	begin

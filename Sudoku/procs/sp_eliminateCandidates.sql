@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[sp_eliminateCandidates]
 	
 AS
-
+SET NOCOUNT ON;
 --eliminate possible candidates for all cells
 --'block' is non overlapping 3 by 3 arrangement of cells there
 --are typically 9 of these
@@ -33,7 +33,7 @@ set @emptyState = (select co.DIGIT_OUTPUT_NOTKNOWN from dbo.constants as co);
 set @candidatesStr = (select co.CANDIDATES_STR_NA from dbo.constants as co);
 
 
-SET NOCOUNT ON;
+
 
 --cycle through cells and for those where no digits have been found eliminate
 --candidates for each cell where there are digits in its peers.

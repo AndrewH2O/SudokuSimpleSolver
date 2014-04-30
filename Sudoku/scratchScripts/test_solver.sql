@@ -16,7 +16,7 @@
 --select * from candidate_digits where cellID=4
 --select * from candidate_digits where cellID=65
 
-
+--exec sp_rule_nakedSingle
 DECLARE @result int;
 
 
@@ -56,7 +56,28 @@ begin
 	end
 end
 
+set @result=0
+while @result<>-1
+begin
+	exec @result=sp_rule_hiddenSingles2;
+	if(@result<>-1) 
+	begin
+		select 'rule "hidden single type 2" found ' + CAST(@result as varchar(2))  + ' digits';
+		--exec sp_eliminateCandidates;
+	end
+end
 
+
+set @result=0
+while @result<>-1
+begin
+	exec @result=sp_rule_lockedCandidates_type1;
+	if(@result<>-1) 
+	begin
+		select 'rule "locked candidates type 1" marked of  ' + CAST(@result as varchar(2))  + ' candidates';
+		--exec sp_eliminateCandidates;
+	end
+end
 
 
 

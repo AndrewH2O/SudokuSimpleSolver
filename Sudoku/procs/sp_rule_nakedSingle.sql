@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[sp_rule_nakedSingle]
 	
 AS
-
+SET NOCOUNT ON;
 --applies rule 'naked singles' to set digits on cells that 
 --only have 1 possible candidate
 --rule named after http://www.sudocue.net/guide.php
@@ -26,7 +26,7 @@ delete @digitsFound;
 set @BAILOUT=100;
 set @BAILOUTCounter=0;
 
-SET NOCOUNT ON;
+
 
 --find instances where the number of possibles is 1 and then 
 --for those where the digit is set as a possible candidate
@@ -42,9 +42,9 @@ with temp as
 insert into @digitsFound
 select numberPossibles, cellID, digit, value, rn from temp;
 
---DEBUG
-----select * from @digitsFound
---end DEBUG
+----DEBUG
+--select * from @digitsFound
+----end DEBUG
 set @number_found = (select count(*) from @digitsFound);
 
 
@@ -57,7 +57,9 @@ else
 		set @counter=1;
 		while @counter<=@number_found
 		begin
-			select * from @digitsFound where @counter=rowNumber
+			----DEBUG
+			--select * from @digitsFound where @counter=rowNumber
+			----end DEBUG
 			set @currentCellID=(select cellID from @digitsFound where @counter = rowNumber);
 			set @currentDigit=(select digit from @digitsFound where @counter = rowNumber);
 		
@@ -80,10 +82,10 @@ else
 
 --set the digit current to equal digit next on those cells where a digit 
 --has been found
-	update candidates
-				set digit_current=digit_next
-				from candidates where digit_current<>digit_next
+update candidates
+			set digit_current=digit_next
+			from candidates where digit_current<>digit_next
 
-				exec sp_eliminateCandidates;
+exec sp_eliminateCandidates;
 
 RETURN @number_found

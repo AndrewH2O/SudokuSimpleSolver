@@ -72,4 +72,4 @@ select digit, cellID,  f_row, f_col, f_block from @freq
 
 
 
-exec sp_get_freqDigit_byOccurence 2
+exec [sp_get_digitsThatOccur_byFreq] 2

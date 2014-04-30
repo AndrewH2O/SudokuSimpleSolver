@@ -1,5 +1,13 @@
-﻿CREATE PROCEDURE [dbo].[sp_rule_hiddenSingles]
+﻿/*
+Use of cross hatching by taking a block and marking off intersecting rows and
+columns where a particular digit appears where this then leaves only a single
+cell in the block that the digit can occur in.
+(this technique does not need to make reference to any candidates just
+uses cross hatching to markoff digits already found within the block)
+*/
+CREATE PROCEDURE [dbo].[sp_rule_hiddenSingles]
 AS
+SET NOCOUNT ON;
 
 DECLARE @digit_counter int, @digit_counterMin int,@digit_counterMax int; 
 DECLARE @block_counter int,  @block_counterMin int, @block_counterMax int;
@@ -41,7 +49,10 @@ begin
 		--markoff all digits by crosshatching and get back list of all cellIDs remaining where
 		--a digit is to be found
 		insert into @possibleIDs exec sp_get_cellIDS_xHatching_by_BlockAndDigit @block_counter, @digit_counter, 3;
-		select * from @possibleIDs;
+		
+		----DEBUG
+		--select * from @possibleIDs;
+		----end DEBUG
 		
 		--special case where xhatching eliminates all but one cell
 		--means that in the block this is the only place the digit could go
@@ -50,8 +61,9 @@ begin
 			--found digit
 			set @cellFound=(select cellID from @possibleIDs);
 			set @number_Found = @number_Found+1;
-			select 'rule "hidden single" found digit '+ CAST(@digit_counter as varchar(2)) +' for cellID ' + CAST(@cellFound as varchar(2)) ;
-			
+			----DEBUG
+			--select 'rule "hidden single" found digit '+ CAST(@digit_counter as varchar(2)) +' for cellID ' + CAST(@cellFound as varchar(2)) ;
+			----end DEBUG
 			exec [sp_setDigit_resetCandidates_byCellID] @cellFound, @digit_counter;
 			
 			

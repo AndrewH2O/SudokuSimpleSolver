@@ -189,4 +189,18 @@
     <Property Name="ParentElementType" Value="SqlSchema" />
     <Property Name="NewName" Value="[sp_updateDigit_ClearCandidate_byCellID]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="12c60d0a-c035-4afb-8a53-3a54f3a3fa05" ChangeDateTime="04/28/2014 16:24:09">
+    <Property Name="ElementName" Value="[dbo].[lookupRCB].[s_subrow]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[lookupRCB]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="s_subRow" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b528b7e2-e3ac-4525-81e7-850570c02b3a" ChangeDateTime="04/29/2014 10:10:57">
+    <Property Name="ElementName" Value="[dbo].[sp_get_freqDigit_byOccurence]" />
+    <Property Name="ElementType" Value="SqlProcedure" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[sp_get_digitsThatOccur_byFreq]" />
+  </Operation>
 </Operations>

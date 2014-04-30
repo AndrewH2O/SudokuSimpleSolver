@@ -5,12 +5,11 @@ CREATE PROCEDURE [dbo].[sp_updateDigit_ClearCandidate_byCellID]
 	@digit int,
 	@debug int=0
 AS
+	SET NOCOUNT ON;
+	
 	DECLARE @candidateDigitNotSet bit, @numberPossibles int, @candidatesStr nvarchar(50);
 	set @candidateDigitNotSet = (select CANDIDATE_DIGIT_NOTSET from constants);
 	set @candidatesStr = (select co.CANDIDATES_STR_NA from dbo.constants as co);
-
-
-	SET NOCOUNT ON;
 
 	if(@debug>0)
 	begin
@@ -33,11 +32,10 @@ AS
 			@out_candidatesAsStr = @candidatesStr output;
 
 	
-		
+	--update count of possible candidates remaining	
 	update ca
 	set ca.numberPossibles=
 		(select count(*) from candidate_digits where cellID=@cellID and value<>@candidateDigitNotSet),
-		ca.digit_next = @digit,
 		ca.asStr = @candidatesStr
 	from candidates as ca inner join candidate_digits as cd 
 	on ca.cellID = cd.cellID
