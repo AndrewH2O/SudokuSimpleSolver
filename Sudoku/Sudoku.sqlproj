@@ -93,6 +93,8 @@
     <Build Include="procs\sp_get_digitsThatOccur_byFreqRange.sql" />
     <Build Include="procs\sp_rule_lockedCandidates_type1.sql" />
     <Build Include="procs\sp_validate_board.sql" />
+    <None Include="scratchScripts\test_solver_from_end_to_end.sql" />
+    <Build Include="procs\sp_simple_Solver.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Sudoku.refactorlog" />

@@ -15,3 +15,5 @@ Post-Deployment Script Template
 :r  .\scripts\sq_loadData.sql
 :r  .\scripts\sq_eliminateCandidates.sql
 
+
+

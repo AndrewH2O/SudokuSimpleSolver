@@ -1,30 +1,20 @@
-﻿use Sudoku
---DECLARE @result int;
---exec  @result = sp_rule_nakedSingle;
---if(@result<>-1) 
---	exec sp_eliminateCandidates;
+﻿CREATE PROCEDURE [dbo].[sp_simple_Solver]
+	
+AS
+SET NOCOUNT ON;
 
-
----keep calling the above
-
-
---exec sp_displayStart
---exec sp_display_digits_current
---exec sp_display_Candidates_byCellID 31
---exec sp_display_Candidates_byCellID 56
---exec sp_display_Candidates_byCellID 65
---select * from candidate_digits where cellID=4
---select * from candidate_digits where cellID=65
-
-
---************************************************************
---******* Run Solver *****************************************
---************************************************************
---exec sp_rule_nakedSingle
-DECLARE @result int, @hasFound bit, @isSoln bit;
+DECLARE @result int;
+DECLARE @hasFound bit;
+DECLARE @isSoln bit;
+DECLARE @outcome int;
+DECLARE @BAILOUT int;
+DECLARE @BAILOUTCounter int;
 
 set @hasFound=1;
 set @isSoln=0;
+set @outcome=0;
+set @BAILOUT=100;
+set @BAILOUTCounter=0;
 
 while ( @isSoln=0 and @hasFound=1)
 begin
@@ -98,15 +88,28 @@ begin
 		set @isSoln=1
 	else
 		set @isSoln=0;
+
+	--check bailout
+	set @BAILOUTCounter=@BAILOUTCounter+1;
+	if(@BAILOUTCounter>@BAILOUT)
+	begin
+		select '****** Simple Solver Bailout ****************'
+		return -1;
+	end
 end
 
 exec @result=sp_validate_board
 if (@isSoln=1 and @result=0)
-	select 'solution found';
-	else 
-	select 'no solution found';
---select * from candidates
+	begin
+		select 'solution found';
+		set @outcome=1;
+	end
+else 
+	begin
+		select 'no solution found';
+		set @outcome=-1;
+	end
 
 
-
+return @outcome
 
