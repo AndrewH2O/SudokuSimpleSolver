@@ -116,6 +116,7 @@
     <None Include="scratchScripts\test_init_subRowColByBlock.sql" />
     <None Include="scratchScripts\test_rule_hiddenSingle2 v2.sql" />
     <None Include="Readme.txt" />
+    <None Include="scratchScripts\test_solver_sp.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
