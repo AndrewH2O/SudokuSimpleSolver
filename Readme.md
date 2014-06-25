@@ -1,4 +1,4 @@
-��# Fun T-Sql project using SSDT in visual studio 2012
+# Fun T-Sql project using SSDT in visual studio 2012
 
 
 
